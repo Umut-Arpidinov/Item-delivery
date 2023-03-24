@@ -5,6 +5,7 @@ import com.example.midtermProject.service.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl  implements BookService {
@@ -23,5 +24,15 @@ public class BookServiceImpl  implements BookService {
     @Override
     public List<BookEntity> getAllBooks() {
         return bookRepo.findAll();
+    }
+
+    @Override
+    public BookEntity getBookById(int id) {
+        return bookRepo.findById(id).get();
+    }
+
+    @Override
+    public void deleteById(int id) {
+        bookRepo.deleteById(id);
     }
 }
