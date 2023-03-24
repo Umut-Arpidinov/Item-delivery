@@ -2,10 +2,7 @@ package com.example.midtermProject.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "books")
@@ -13,12 +10,15 @@ public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @NotBlank(message = "Name is required")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
+
     @NotBlank(message = "Author is required")
     @Size(min = 2, max = 50, message = "Author must be between 2 and 50 characters")
     private String author;
+
     private String availability;
 
     public int getId() {

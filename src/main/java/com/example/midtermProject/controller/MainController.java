@@ -31,10 +31,20 @@ public class MainController {
     public String home(){
         return "home";
     }
+
     @GetMapping("/book_register")
     public String bookRegister(Model model){
         model.addAttribute("book", new BookEntity());
         return "newBook";
+    }
+
+    @PostMapping("/save")
+    public String addNewBook(@Valid @ModelAttribute("book") BookEntity book, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "newBook";
+        }
+        service.save(book);
+        return "redirect:/all_books";
     }
 
     @GetMapping("/all_books")
@@ -53,15 +63,6 @@ public class MainController {
         return "myBooks";
     }
 
-    @PostMapping("/save")
-    public String addNewBook(@Valid @ModelAttribute("book") BookEntity book, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "newBook";
-        } else {
-            service.save(book);
-            return "redirect:/all_books";
-        }
-    }
 
     @RequestMapping("/myList/{id}")
     public String getMyList(@PathVariable("id") int id){
@@ -70,12 +71,30 @@ public class MainController {
         myBookService.save(mb);
         return "redirect:/my_books";
     }
+
     @RequestMapping("/editBook/{id}")
-    public String editBook(@PathVariable("id") int id,Model model){
+    public String editBook(@PathVariable("id") int id, Model model) {
         BookEntity book = service.getBookById(id);
-        model.addAttribute("book",book);
+        model.addAttribute("book", book);
         return "editBook";
     }
+
+    @PostMapping("/editBook/{id}")
+    public String updateBook(@PathVariable("id") int id, @Valid @ModelAttribute("book") BookEntity book,
+                             BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "editBook";
+        } else {
+            BookEntity existingBook = service.getBookById(id);
+            existingBook.setName(book.getName());
+            existingBook.setAuthor(book.getAuthor());
+            existingBook.setAvailability(book.getAvailability());
+            service.save(existingBook);
+            return "redirect:/all_books";
+        }
+    }
+
+
     @RequestMapping("/deleteBook/{id}")
     public String deleteBookById(@PathVariable("id") int id){
         service.deleteById(id);

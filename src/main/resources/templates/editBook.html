@@ -19,13 +19,13 @@
                     <a class="nav-link text-white" href="/" style="font-size: 24px; font-weight: bold;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="all_books" style="font-size: 24px; font-weight: bold;">Available books</a>
+                    <a class="nav-link text-white" href="/all_books" style="font-size: 24px; font-weight: bold;">Available books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="my_books" style="font-size: 24px; font-weight: bold;">My books</a>
+                    <a class="nav-link text-white" href="/my_books" style="font-size: 24px; font-weight: bold;">My books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="book_register" style="font-size: 24px; font-weight: bold;">New book</a>
+                    <a class="nav-link text-white" href="/book_register" style="font-size: 24px; font-weight: bold;">New book</a>
                 </li>
             </ul>
         </div>
@@ -34,18 +34,18 @@
 </nav>
 <div class="container my-5 p-5" style="border:2px solid darkred;">
     <h4 class="text-center">Edit Book</h4>
-    <form class="col-md-4 offset-md-4" th:action="@{/save}" method="post" th:object="${book}">
-        <input type="hidden" name="id" th:value="${book.id}">
+    <form class="col-md-4 offset-md-4" th:action="@{/editBook/{id}(id=${book.id})}" method="post" th:object="${book}">
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label> <input type="text" class="form-control" name="name" th:value="${book.name}" id="name">
+            <label for="name" class="form-label">Name</label> <input type="text" th:field="*{name}" class="form-control" id="name" required th:classappend="${#fields.hasErrors('name')} ? 'border-danger'">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
         </div>
         <div class="mb-3">
-            <label for="author" class="form-label">Author</label> <input type="text" class="form-control" name="author" th:value="${book.author}"  id="author">
+            <label for="name" class="form-label">Author</label> <input type="text" th:field="*{author}" class="form-control" id="author" required th:classappend="${#fields.hasErrors('author')} ? 'border-danger'">
+            <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="text-danger"></div>
         </div>
         <div class="mb-3">
             <label for="availability" class="form-label">Availability</label>
-            <select class="form-select" name="availability" id="availability">
-                <option value="">Select availability</option>
+            <select class="form-select"  name="availability" id="availability">
                 <option value="available">Available</option>
                 <option value="not-available">Not available</option>
             </select>
