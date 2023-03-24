@@ -4,8 +4,11 @@ import com.example.midtermProject.entity.BookEntity;
 import com.example.midtermProject.entity.MyBookEntity;
 import com.example.midtermProject.service.impl.BookServiceImpl;
 import com.example.midtermProject.service.impl.MyBookServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +32,8 @@ public class MainController {
         return "home";
     }
     @GetMapping("/book_register")
-    public String bookRegister(){
+    public String bookRegister(Model model){
+        model.addAttribute("book", new BookEntity());
         return "newBook";
     }
 
@@ -50,9 +54,13 @@ public class MainController {
     }
 
     @PostMapping("/save")
-    public String addNewBook(@ModelAttribute BookEntity book){
-        service.save(book);
-        return "redirect:/all_books";
+    public String addNewBook(@Valid @ModelAttribute("book") BookEntity book, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "newBook";
+        } else {
+            service.save(book);
+            return "redirect:/all_books";
+        }
     }
 
     @RequestMapping("/myList/{id}")

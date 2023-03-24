@@ -43,8 +43,14 @@
             <label for="author" class="form-label">Author</label> <input type="text" class="form-control" name="author" th:value="${book.author}"  id="author">
         </div>
         <div class="mb-3">
-            <label for="availability" class="form-label">Availability</label> <input type="text" class="form-control" name="availability" th:value="${book.availability}" id="availability">
+            <label for="availability" class="form-label">Availability</label>
+            <select class="form-select" name="availability" id="availability">
+                <option value="">Select availability</option>
+                <option value="available">Available</option>
+                <option value="not-available">Not available</option>
+            </select>
         </div>
+
         <div style="text-align: center;"> <button type="submit" class="btn btn-primary">Submit</button></div>
     </form>
 </div>

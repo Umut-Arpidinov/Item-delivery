@@ -9,12 +9,12 @@ public class MyBookEntity {
     private int id;
     private String name;
     private String author;
-    private Boolean availability;
+    private String availability;
 
 
     public MyBookEntity(){}
 
-    public MyBookEntity(int id, String name, String author, Boolean availability) {
+    public MyBookEntity(int id, String name, String author, String availability) {
         super();
         this.id = id;
         this.name = name;
@@ -46,11 +46,11 @@ public class MyBookEntity {
         this.author = author;
     }
 
-    public Boolean getAvailability() {
+    public String getAvailability() {
         return availability;
     }
 
-    public void setAvailability(Boolean availability) {
+    public void setAvailability(String availability) {
         this.availability = availability;
     }
 }

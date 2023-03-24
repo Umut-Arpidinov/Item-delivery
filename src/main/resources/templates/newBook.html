@@ -34,16 +34,23 @@
 </nav>
     <div class="container my-5 p-5" style="border:2px solid darkred;">
         <h4 class="text-center">Register a new book</h4>
-        <form class="col-md-4 offset-md-4" th:action="@{save}" method="post">
+        <form class="col-md-4 offset-md-4" th:action="@{save}" method="post" th:object="${book}">
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label> <input type="text" name="name" class="form-control" id="name">
+                <label for="name" class="form-label">Name</label> <input type="text" th:field="*{name}" class="form-control" id="name" required th:classappend="${#fields.hasErrors('name')} ? 'border-danger'">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Author</label> <input type="text" class="form-control" name="author" id="author">
+                <label for="name" class="form-label">Author</label> <input type="text" th:field="*{author}" class="form-control" id="author" required th:classappend="${#fields.hasErrors('author')} ? 'border-danger'">
+                <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="text-danger"></div>
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Availability</label> <input type="text" class="form-control" name="availability"  id="availability">
+                <label for="availability" class="form-label">Availability</label>
+                <select class="form-select"  name="availability" id="availability">
+                    <option value="available">Available</option>
+                    <option value="not-available">Not available</option>
+                </select>
             </div>
+
             <div style="text-align: center;"> <button type="submit" class="btn btn-primary">Submit</button></div>
         </form>
     </div>
