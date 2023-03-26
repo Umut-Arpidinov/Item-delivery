@@ -31,13 +31,13 @@ public class MainController {
     }
 
     @GetMapping("/item_register")
-    public String bookRegister(Model model){
+    public String ItemRegister(Model model){
         model.addAttribute("item", new ItemEntity());
         return "newItem";
     }
 
     @PostMapping("/save")
-    public String addNewBook(@Valid @ModelAttribute("item") ItemEntity book, BindingResult bindingResult){
+    public String addNewItem(@Valid @ModelAttribute("item") ItemEntity book, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "newItem";
         }
@@ -46,8 +46,8 @@ public class MainController {
     }
 
     @GetMapping("/all_items")
-    public ModelAndView getAllBooks(){
-        List<ItemEntity> list = service.getAllBooks();
+    public ModelAndView getAllItems(){
+        List<ItemEntity> list = service.getAllItems();
         ModelAndView m = new ModelAndView();
         m.setViewName("allItems");
         m.addObject("items",list);
@@ -55,37 +55,37 @@ public class MainController {
 
     }
     @GetMapping("/my_items")
-    public String getMyBooks(Model model){
-        List<MyItemEntity> list = myItemService.getAllBooks();
-        model.addAttribute("book",list);
+    public String getMyItems(Model model){
+        List<MyItemEntity> list = myItemService.getAllItems();
+        model.addAttribute("item",list);
         return "myItems";
     }
 
 
     @RequestMapping("/myList/{id}")
     public String getMyList(@PathVariable("id") int id){
-        ItemEntity b = service.getBookById(id);
-        MyItemEntity mb = new MyItemEntity(b.getId(),b.getItemName(),b.getOwner(),b.getPrice(),b.getCurrency(),b.getType());
+        ItemEntity b = service.getItemById(id);
+        MyItemEntity mb = new MyItemEntity(b.getId(),b.getItemName(),b.getDescription(),b.getPrice(),b.getCurrency(),b.getType());
         myItemService.save(mb);
         return "redirect:/my_items";
     }
 
     @RequestMapping("/editItem/{id}")
-    public String editBook(@PathVariable("id") int id, Model model) {
-        ItemEntity item = service.getBookById(id);
+    public String editItem(@PathVariable("id") int id, Model model) {
+        ItemEntity item = service.getItemById(id);
         model.addAttribute("item", item);
         return "editItem";
     }
 
     @PostMapping("/editItem/{id}")
-    public String updateBook(@PathVariable("id") int id, @Valid @ModelAttribute("item") ItemEntity item,
+    public String updateItem(@PathVariable("id") int id, @Valid @ModelAttribute("item") ItemEntity item,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "editItem";
         } else {
-            ItemEntity existingItem = service.getBookById(id);
+            ItemEntity existingItem = service.getItemById(id);
             existingItem.setItemName(item.getItemName());
-            existingItem.setOwner(item.getOwner());
+            existingItem.setDescription(item.getDescription());
             existingItem.setPrice(item.getPrice());
             existingItem.setCurrency(item.getCurrency());
             existingItem.setType(item.getType());
@@ -96,7 +96,7 @@ public class MainController {
 
 
     @RequestMapping("/deleteItem/{id}")
-    public String deleteBookById(@PathVariable("id") int id){
+    public String deleteItemById(@PathVariable("id") int id){
         service.deleteById(id);
         return "redirect:/all_items";
     }

@@ -10,26 +10,26 @@ import java.util.List;
 @Service
 public class MyItemServiceImpl implements MyItemService {
 
-    private final MyItemRepo myBookRepo;
-    public MyItemServiceImpl(MyItemRepo myBookRepo){
-        this.myBookRepo = myBookRepo;
+    private final MyItemRepo myItemRepo;
+    public MyItemServiceImpl(MyItemRepo myItemRepo){
+        this.myItemRepo = myItemRepo;
     }
     @Override
     public void save(MyItemEntity myBook) {
-        myBookRepo.save(myBook);
+        myItemRepo.save(myBook);
     }
 
     @Override
-    public MyItemEntity getBookById(int id) {
-        return myBookRepo.findById(id).get();
+    public MyItemEntity getItemById(int id) {
+        return myItemRepo.findById(id).get();
     }
 
     @Override
-    public List<MyItemEntity> getAllBooks() {
-       return myBookRepo.findAll();
+    public List<MyItemEntity> getAllItems() {
+       return myItemRepo.findAll();
     }
     @Override
     public void deleteById(int id){
-        myBookRepo.deleteById(id);
+        myItemRepo.deleteById(id);
     }
 }

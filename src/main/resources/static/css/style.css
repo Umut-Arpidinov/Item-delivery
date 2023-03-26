@@ -1,6 +1,15 @@
-.bg-custom{
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
+
+.bg-custom {
     background-color: #540404;
 }
+
+.container.my-5.col-md-6 {
+    width: 100%;
+    height: 500px;
+}
+
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -12,4 +21,80 @@
     max-width: 100%;
     height: auto;
     justify-content: center;
+    border-radius: 20px;
+}
+img{
+    border-radius: 20px;
+
+}
+
+
+.description-cell {
+    cursor: pointer;
+    max-width: 200px; /* Set the maximum width of the td element */
+    overflow: hidden; /* Hide any overflow */
+    text-overflow: ellipsis; /* Add an ellipsis at the end of the text if it overflows */
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+}
+td.description-cell:hover {
+    background-color: lightgray;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal p {
+    white-space: pre-wrap;
+    font-size: 16px;
+    color: #fff;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px;
+}
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+.grid-item img {
+    width: 100%;
+    height: auto;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.grid-item:hover .overlay {
+    opacity: 1;
+}
+.text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
 }

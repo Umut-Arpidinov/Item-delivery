@@ -13,7 +13,7 @@ public class MyItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String itemName;
-    private String owner;
+    private String description;
     private String price;
     private String currency;
     private String type;
@@ -21,10 +21,10 @@ public class MyItemEntity {
     public MyItemEntity() {
     }
 
-    public MyItemEntity(int id, String itemName, String owner, String price, String currency, String type) {
+    public MyItemEntity(int id, String itemName, String description, String price, String currency, String type) {
         this.id = id;
         this.itemName = itemName;
-        this.owner = owner;
+        this.description = description;
         this.price = price;
         this.currency = currency;
         this.type = type;
@@ -46,12 +46,12 @@ public class MyItemEntity {
         this.itemName = itemName;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPrice() {

@@ -8,7 +8,10 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-image: url('static/images/back.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;">
 <nav class="navbar navbar-expand-lg navbar-light bg-custom" id="custom">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,11 +42,24 @@
         <h4>Welcome to Ala Too Shop! Whether you're looking to buy or sell, our platform provides a convenient and hassle-free experience for all your shopping needs. Our marketplace features a wide variety of products, ranging from electronics and fashion to home goods and more. </h4>
      <!--   <img src="/images/mainPage.jpg  " width="1024" style="border-radius: 20px" >-->
     </div>
-<div class="image-grid">
-    <img src="/images/mainPage.jpg">
-    <img src="/images/mainPage.jpg">
-    <img src="/images/mainPage.jpg">
-    <img src="/images/mainPage.jpg">
+<div class="grid-container">
+    <div class="grid-item">
+        <a href="item_register">
+            <img src="/images/new.jpg" alt="Avatar">
+            <div class="overlay">
+                <div class="text">Sell any item to students of our university</div>
+            </div>
+        </a>
+
+    </div>
+    <div class="grid-item">
+        <a href="/all_items">
+            <img src="/images/get.jpg" alt="Avatar">
+            <div class="overlay">
+                <div class="text">Buy any item from students of our university</div>
+            </div>
+        </a>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

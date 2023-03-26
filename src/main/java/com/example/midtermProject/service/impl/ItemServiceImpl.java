@@ -16,17 +16,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void save(ItemEntity itemEntity) {
-        itemRepo.save(itemEntity);
+    public void save(ItemEntity item) {
+        itemRepo.save(item);
     }
 
     @Override
-    public List<ItemEntity> getAllBooks() {
+    public List<ItemEntity> getAllItems() {
         return itemRepo.findAll();
     }
 
     @Override
-    public ItemEntity getBookById(int id) {
+    public ItemEntity getItemById(int id) {
         return itemRepo.findById(id).get();
     }
 

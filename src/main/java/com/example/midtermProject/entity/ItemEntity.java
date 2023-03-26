@@ -1,6 +1,7 @@
 package com.example.midtermProject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -11,12 +12,12 @@ public class ItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    @NotBlank(message = "Item name is required")
+    @Size(min = 2, max = 50, message = "Item name must be between 2 and 50 characters")
     private String itemName;
-    @NotBlank(message = "Author is required")
-    @Size(min = 2, max = 50, message = "Author must be between 2 and 50 characters")
-    private String owner;
+    @Column(name = "description", columnDefinition = "TEXT", length = 1000)
+    private String description;
+    @Digits(integer = 10, fraction = 2, message = "Invalid price")
     private String price;
     private String currency;
     private String type;
@@ -24,10 +25,10 @@ public class ItemEntity {
     public ItemEntity() {
     }
 
-    public ItemEntity(int id, String itemName, String owner, String price, String currency, String type) {
+    public ItemEntity(int id, String itemName, String description, String price, String currency, String type) {
         this.id = id;
         this.itemName = itemName;
-        this.owner = owner;
+        this.description = description;
         this.price = price;
         this.currency = currency;
         this.type = type;
@@ -49,12 +50,12 @@ public class ItemEntity {
         this.itemName = itemName;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setDescription(String owner) {
+        this.description = owner;
     }
 
     public String getPrice() {
