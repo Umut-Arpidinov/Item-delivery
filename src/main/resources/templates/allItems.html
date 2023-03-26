@@ -19,13 +19,13 @@
                     <a class="nav-link text-white" href="/" style="font-size: 24px; font-weight: bold;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="all_books" style="font-size: 24px; font-weight: bold;">Available books</a>
+                    <a class="nav-link text-white" href="/all_items" style="font-size: 24px; font-weight: bold;">Available items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="my_books" style="font-size: 24px; font-weight: bold;">My books</a>
+                    <a class="nav-link text-white" href="/my_items" style="font-size: 24px; font-weight: bold;">My Items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="book_register" style="font-size: 24px; font-weight: bold;">New book</a>
+                    <a class="nav-link text-white" href="/item_register" style="font-size: 24px; font-weight: bold;">New Item</a>
                 </li>
             </ul>
         </div>
@@ -38,21 +38,25 @@
             <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Author</th>
-                <th scope="col">Availability</th>
+                <th scope="col">Item name</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Price</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Type</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="b :${book}">
+            <tr th:each="b :${item}">
                 <td th:text="${b.id}"></td>
-                <td th:text="${b.name}"></td>
-                <td th:text="${b.author}"></td>
-                <td th:text="${b.availability}"></td>
-                <td> <a class="btn btn-secondary btn-sm" th:href="@{/myList/{id}(id=${b.id})}">Add to my books</a>
-                    <a style="color:darkblue" th:href="@{/editBook/{id}(id=${b.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
-                    <a style="color:red" th:href="@{/deleteBook/{id}(id=${b.id})}"><i class="fa-solid fa-trash ms-4"></i></a>
+                <td th:text="${b.itemName}"></td>
+                <td th:text="${b.owner}"></td>
+                <td th:text="${b.price}"></td>
+                <td th:text="${b.currency}"></td>
+                <td th:text="${b.type}"></td>
+                <td> <a class="btn btn-secondary btn-sm" th:href="@{/myList/{id}(id=${b.id})}">Add to my Items</a>
+                    <a style="color:darkblue" th:href="@{/editItem/{id}(id=${b.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
+                    <a style="color:red" th:href="@{/deleteItem/{id}(id=${b.id})}"><i class="fa-solid fa-trash ms-4"></i></a>
                 </td>
 
             </tr>

@@ -1,8 +1,6 @@
 package com.example.midtermProject.controller;
 
-import com.example.midtermProject.service.MyBookService;
-import com.example.midtermProject.service.impl.MyBookServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.midtermProject.service.impl.MyItemServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MyBookListController {
 
-    private MyBookServiceImpl service;
-    public MyBookListController(MyBookServiceImpl service){
+    private MyItemServiceImpl service;
+    public MyBookListController(MyItemServiceImpl service){
         this.service = service;
     }
     @RequestMapping("/deleteMyList/{id}")

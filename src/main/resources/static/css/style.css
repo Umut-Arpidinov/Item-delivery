@@ -1,0 +1,15 @@
+.bg-custom{
+    background-color: #540404;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin-left: 20px;
+}
+
+.image-grid img {
+    max-width: 100%;
+    height: auto;
+    justify-content: center;
+}

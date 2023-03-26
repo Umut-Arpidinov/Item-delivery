@@ -1,30 +1,28 @@
 package com.example.midtermProject.controller;
 
-import com.example.midtermProject.entity.BookEntity;
-import com.example.midtermProject.entity.MyBookEntity;
-import com.example.midtermProject.service.impl.BookServiceImpl;
-import com.example.midtermProject.service.impl.MyBookServiceImpl;
+import com.example.midtermProject.entity.ItemEntity;
+import com.example.midtermProject.entity.MyItemEntity;
+import com.example.midtermProject.service.impl.ItemServiceImpl;
+import com.example.midtermProject.service.impl.MyItemServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class MainController {
 
-    private final BookServiceImpl service;
-    private final MyBookServiceImpl myBookService;
+    private final ItemServiceImpl service;
+    private final MyItemServiceImpl myItemService;
 
-    public MainController(BookServiceImpl service, MyBookServiceImpl myBookService){
+    public MainController(ItemServiceImpl service, MyItemServiceImpl myBookService){
 
         this.service = service;
-        this.myBookService = myBookService;
+        this.myItemService = myBookService;
     }
 
     @GetMapping("/")
@@ -32,73 +30,75 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/book_register")
+    @GetMapping("/item_register")
     public String bookRegister(Model model){
-        model.addAttribute("book", new BookEntity());
-        return "newBook";
+        model.addAttribute("item", new ItemEntity());
+        return "newItem";
     }
 
     @PostMapping("/save")
-    public String addNewBook(@Valid @ModelAttribute("book") BookEntity book, BindingResult bindingResult){
+    public String addNewBook(@Valid @ModelAttribute("item") ItemEntity book, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "newBook";
+            return "newItem";
         }
         service.save(book);
-        return "redirect:/all_books";
+        return "redirect:/all_items";
     }
 
-    @GetMapping("/all_books")
+    @GetMapping("/all_items")
     public ModelAndView getAllBooks(){
-        List<BookEntity> list = service.getAllBooks();
+        List<ItemEntity> list = service.getAllBooks();
         ModelAndView m = new ModelAndView();
-        m.setViewName("allBooks");
-        m.addObject("books",list);
-        return new ModelAndView("allBooks","book",list);
+        m.setViewName("allItems");
+        m.addObject("items",list);
+        return new ModelAndView("allItems","item",list);
 
     }
-    @GetMapping("/my_books")
+    @GetMapping("/my_items")
     public String getMyBooks(Model model){
-        List<MyBookEntity> list = myBookService.getAllBooks();
+        List<MyItemEntity> list = myItemService.getAllBooks();
         model.addAttribute("book",list);
-        return "myBooks";
+        return "myItems";
     }
 
 
     @RequestMapping("/myList/{id}")
     public String getMyList(@PathVariable("id") int id){
-        BookEntity b = service.getBookById(id);
-        MyBookEntity mb = new MyBookEntity(b.getId(),b.getName(),b.getAuthor(),b.getAvailability());
-        myBookService.save(mb);
-        return "redirect:/my_books";
+        ItemEntity b = service.getBookById(id);
+        MyItemEntity mb = new MyItemEntity(b.getId(),b.getItemName(),b.getOwner(),b.getPrice(),b.getCurrency(),b.getType());
+        myItemService.save(mb);
+        return "redirect:/my_items";
     }
 
-    @RequestMapping("/editBook/{id}")
+    @RequestMapping("/editItem/{id}")
     public String editBook(@PathVariable("id") int id, Model model) {
-        BookEntity book = service.getBookById(id);
-        model.addAttribute("book", book);
-        return "editBook";
+        ItemEntity item = service.getBookById(id);
+        model.addAttribute("item", item);
+        return "editItem";
     }
 
-    @PostMapping("/editBook/{id}")
-    public String updateBook(@PathVariable("id") int id, @Valid @ModelAttribute("book") BookEntity book,
+    @PostMapping("/editItem/{id}")
+    public String updateBook(@PathVariable("id") int id, @Valid @ModelAttribute("item") ItemEntity item,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "editBook";
+            return "editItem";
         } else {
-            BookEntity existingBook = service.getBookById(id);
-            existingBook.setName(book.getName());
-            existingBook.setAuthor(book.getAuthor());
-            existingBook.setAvailability(book.getAvailability());
-            service.save(existingBook);
-            return "redirect:/all_books";
+            ItemEntity existingItem = service.getBookById(id);
+            existingItem.setItemName(item.getItemName());
+            existingItem.setOwner(item.getOwner());
+            existingItem.setPrice(item.getPrice());
+            existingItem.setCurrency(item.getCurrency());
+            existingItem.setType(item.getType());
+            service.save(existingItem);
+            return "redirect:/all_items";
         }
     }
 
 
-    @RequestMapping("/deleteBook/{id}")
+    @RequestMapping("/deleteItem/{id}")
     public String deleteBookById(@PathVariable("id") int id){
         service.deleteById(id);
-        return "redirect:/all_books";
+        return "redirect:/all_items";
     }
 
 
