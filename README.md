@@ -40,7 +40,7 @@ Project is: _in progress_
 
 ## Acknowledgements
 
-- Inspiration video which helped me a lot while doing this project  [from there](https://youtu.be/xnur2ujza6k)
+- Inspiration [video](https://youtu.be/xnur2ujza6k) which helped me a lot while doing this project  
 
 ## Contact
 Created by [github.com](https://github.com/Arpidinov) - feel free to contact me!
