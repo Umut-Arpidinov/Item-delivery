@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemEntity getItemById(int id) {
-        return itemRepo.findById(id).get();
+        return itemRepo.findById(id).orElse(null);
     }
 
     @Override
