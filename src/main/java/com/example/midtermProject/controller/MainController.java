@@ -62,7 +62,7 @@ public class MainController {
     }
 
 
-    @RequestMapping("/myList/{id}")
+    @RequestMapping(value = "/myList/{id}",method = RequestMethod.POST)
     public String getMyList(@PathVariable("id") int id){
         ItemEntity b = service.getItemById(id);
         MyItemEntity mb = new MyItemEntity(b.getId(),b.getItemName(),b.getDescription(),b.getPrice(),b.getCurrency(),b.getType());
